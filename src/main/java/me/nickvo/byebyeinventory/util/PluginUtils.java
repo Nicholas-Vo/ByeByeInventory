@@ -46,7 +46,12 @@ public class PluginUtils {
         // where an item we want to keep has the exact same data as an item in the inventory
         Set<ItemStack> keep = new HashSet<>();
 
-        e.getDrops().forEach(item -> {
+        for (ItemStack item : e.getDrops()) {
+            if (config.getBoolean("exclude-items")) {
+                if (config.getExcludedItems().contains(item.getType())) {
+                    keep.add(item);
+                }
+            }
             if (config.getBoolean("exclude-armor")) {
                 if (getArmorContents(player).contains(item)) {
                     keep.add(item);
@@ -57,7 +62,7 @@ public class PluginUtils {
                     keep.add(item);
                 }
             }
-        });
+        }
 
         e.getDrops().clear();
         keep.forEach(itemStack -> e.getDrops().add(itemStack));

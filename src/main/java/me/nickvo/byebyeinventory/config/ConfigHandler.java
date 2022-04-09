@@ -1,6 +1,9 @@
 package me.nickvo.byebyeinventory.config;
 
 import me.nickvo.byebyeinventory.ByeByeInventory;
+import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -18,10 +21,11 @@ public class ConfigHandler {
         rebuildConfig();
     }
 
-    /*
-       Admins can determine if they want the plugin to work per-dimension via config
-     */
+    // Admins can determine if they want the plugin to work per-dimension via config
     private final List<World.Environment> dimensions = new ArrayList<>();
+
+    // Admins can exclude specific items from being voided
+    private final List<Material> excludedItems = new ArrayList<>();
 
     public void rebuildConfig() {
         File configuration = new File(plugin.getDataFolder() + File.separator + "config.yml");
@@ -46,6 +50,12 @@ public class ConfigHandler {
         if (config.getBoolean("enabled-in-end")) {
             dimensions.add(World.Environment.THE_END);
         }
+
+        // Get list of excluded materials from configuration
+        if (config.getBoolean("exclude-items")) {
+            config.getStringList("excluded-items-list")
+                    .forEach(string -> excludedItems.add(Material.valueOf(string)));
+        }
     }
 
     public String getMessage(String key) {
@@ -54,6 +64,10 @@ public class ConfigHandler {
 
     public boolean getBoolean(String key) {
         return config.getBoolean(key);
+    }
+
+    public List<Material> getExcludedItems() {
+        return excludedItems;
     }
 
     public List<World.Environment> getDimensions() {

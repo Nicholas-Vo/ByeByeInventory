@@ -28,6 +28,10 @@ public class DeathListener implements Listener {
             return;
         }
 
+        if (player.hasPermission("byebyeinventory.exempt")) {
+            return;
+        }
+
         World.Environment playerWorld = player.getWorld().getEnvironment();
 
         // Check if the player is in a world where the plugin is active
