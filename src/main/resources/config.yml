@@ -33,7 +33,7 @@ exclude-armor: false
 ## This message will not display if the player has an empty inventory.
 
 display-message-to-server: false
-message-to-server: '&8[!] &c%playername% &rdied in the %dimension% and lost %count% items!'
+message-to-server: '&8[!] &c%playername% &rdied in the %dimension% and lost %count% item(s)!'
 
 ### Broadcast message to server when a player's items are voided
 ##
@@ -41,7 +41,7 @@ message-to-server: '&8[!] &c%playername% &rdied in the %dimension% and lost %cou
 ## This message will not display if the player has an empty inventory.
 
 display-message-to-player: true
-message-to-player: 'You have died, and your inventory of &c%count% &ritems have been destroyed.'
+message-to-player: 'You have died, and your inventory of &c%count% &ritem(s) have been destroyed.'
 
 ### Available keywords:
 ##

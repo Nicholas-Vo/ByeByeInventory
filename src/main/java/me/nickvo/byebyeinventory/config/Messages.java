@@ -8,12 +8,6 @@ import org.bukkit.entity.Player;
 import java.text.DecimalFormat;
 
 public class Messages {
-    private final YamlConfiguration config;
-
-    public Messages(YamlConfiguration config) {
-        this.config = config;
-    }
-
     /**
      * Translate string from config into string to display
      */

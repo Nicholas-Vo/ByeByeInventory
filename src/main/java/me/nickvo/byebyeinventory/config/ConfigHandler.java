@@ -16,8 +16,6 @@ public class ConfigHandler {
         this.plugin = plugin;
 
         rebuildConfig();
-
-        new Messages(config);
     }
 
     /*

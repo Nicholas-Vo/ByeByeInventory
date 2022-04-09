@@ -10,12 +10,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 /**
  * ByeByeInventory version 1.0.0
  * Created by _NickV (GitHub: Nicholas-Vo) on 4/9/2022
- *
- * todo:
- *
- * - add keepinventory over-ride?
- * - add ability to exclude hotbar
- *
  */
 public final class ByeByeInventory extends JavaPlugin {
     private ByeByeInventory plugin;
@@ -31,8 +25,8 @@ public final class ByeByeInventory extends JavaPlugin {
         plugin = this;
 
         config = new ConfigHandler(this);
-        utils = new PluginUtils();
-        messages = new Messages(config.getConfigurationFile());
+        messages = new Messages();
+        utils = new PluginUtils(this);
 
         new BaseCommand(this); // This is the /byebyeinv command
         new DeathListener(this);
