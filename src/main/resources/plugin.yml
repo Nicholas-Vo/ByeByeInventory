@@ -1,0 +1,10 @@
+name: ByeByeInventory
+version: '${project.version}'
+main: me.nickvo.byebyeinventory.ByeByeInventory
+api-version: 1.18
+authors: [ _NickV ]
+description: Bukkit plugin to clear an inventory upon death
+
+commands:
+  byebyeinv:
+    description: Base command for the plugin

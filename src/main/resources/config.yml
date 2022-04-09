@@ -1,0 +1,17 @@
+# ByeByeInventory by _NickV
+# For support, please visit my Discord server: https://discord.gg/fGzb73sPmV
+
+#### Dimensions
+##
+# To disable the plugin in a specific dimension, change the below settings.
+
+enabled-in-overworld: true
+enabled-in-nether: true
+enabled-in-end: true
+
+#### Log deaths to the console
+##
+# Will alert the console when a player has had their inventory voided by the plugin.
+# The plugin will also print out how many items the player has lost.
+
+log-death-to-console: true
