@@ -7,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class PluginUtils {
@@ -24,31 +25,32 @@ public class PluginUtils {
     }
 
     public boolean itemInHotbar(Player p, ItemStack item) {
-        List<ItemStack> hotbar = new ArrayList<>();
-
         for (int i = 0; i < 8; i++) {
-            ItemStack theItem = p.getInventory().getItem(i);
-            if (theItem != null) {
-                hotbar.add(theItem);
+            if (p.getInventory().getItem(i) == null) {
+                continue;
+            }
+            if (p.getInventory().getItem(i).equals(item)) {
+                return true;
             }
         }
 
-        return hotbar.contains(item);
+        return false;
     }
 
     // Iterate through all armor slots
     public boolean itemInArmorSlot(Player p, ItemStack item) {
-        List<ItemStack> armorSlot = new ArrayList<>();
-
         for (int i = 36; i <= 39; i++) {
             ItemStack theItem = p.getInventory().getItem(i);
 
-            if (theItem != null) {
-                armorSlot.add(p.getInventory().getItem(i));
+            if (theItem == null) {
+                continue;
+            }
+            if (Objects.deepEquals(theItem, item)) {
+                return true;
             }
         }
 
-        return armorSlot.contains(item);
+        return false;
     }
 
 }

@@ -15,8 +15,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class DeathListener implements Listener {
     private final ByeByeInventory plugin;
@@ -57,7 +57,12 @@ public class DeathListener implements Listener {
             return;
         }
 
-        List<ItemStack> keep = new ArrayList<>(); // These items won't be deleted
+        /*
+        Set of the items we don't want deleted. Using set to avoid duplicates
+        in the case where an item to keep is the exact same data as an item
+        in the inventory.
+         */
+        Set<ItemStack> keep = new HashSet<>();
 
         e.getDrops().forEach(item -> {
             if (config.getBoolean("exclude-armor")) {
@@ -73,9 +78,7 @@ public class DeathListener implements Listener {
         });
 
         e.getDrops().clear();
-
         keep.forEach(itemStack -> e.getDrops().add(itemStack));
-
         count -= keep.size();
 
         if (config.getBoolean("log-death-to-console")) {
