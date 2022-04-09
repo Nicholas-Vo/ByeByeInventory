@@ -3,6 +3,9 @@ package me.nickvo.byebyeinventory.util;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
 public class PluginUtils {
 
     public int countInventory(Player p) {
@@ -15,6 +18,28 @@ public class PluginUtils {
         }
 
         return count;
+    }
+
+    public boolean itemInHotbar(Player p, ItemStack item) {
+        for (int i = 0; i < 8; i++) {
+            if (p.getInventory().getItem(i) == null) {
+                continue;
+            }
+            if (p.getInventory().getItem(i).equals(item)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // Iterate through all armor slots
+    public boolean itemInArmorSlot(Player p, ItemStack item) {
+        for (var i : p.getInventory().getArmorContents()) {
+            return i.equals(item);
+        }
+
+        return false;
     }
 
 }

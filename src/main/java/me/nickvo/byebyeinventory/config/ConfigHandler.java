@@ -16,21 +16,23 @@ public class ConfigHandler {
         this.plugin = plugin;
 
         rebuildConfig();
+
+        new Messages(config);
     }
 
     /*
-    List of dimensions where the plugin will void inventories
+       Admins can determine if they want the plugin to work per-dimension via config
      */
     private final List<World.Environment> dimensions = new ArrayList<>();
 
     public void rebuildConfig() {
-        File conf = new File(plugin.getDataFolder() + File.separator + "config.yml");
+        File configuration = new File(plugin.getDataFolder() + File.separator + "config.yml");
 
-        if (!conf.exists()) {
+        if (!configuration.exists()) {
             plugin.saveResource("config.yml", true);
         }
 
-        config = YamlConfiguration.loadConfiguration(conf);
+        config = YamlConfiguration.loadConfiguration(configuration);
 
         dimensions.clear();
 
@@ -48,6 +50,10 @@ public class ConfigHandler {
         }
     }
 
+    public String getMessage(String key) {
+        return config.getString(key);
+    }
+
     public boolean getBoolean(String key) {
         return config.getBoolean(key);
     }
@@ -56,6 +62,9 @@ public class ConfigHandler {
         return dimensions;
     }
 
+    public YamlConfiguration getConfigurationFile() {
+        return config;
+    }
 }
 
 
