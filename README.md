@@ -12,9 +12,6 @@ Admins can configure this to occur across specific worlds, and can exclude worn 
 # Configuration
 
 ```
-# ByeByeInventory by _NickV
-# For support, please visit my Discord server: https://discord.gg/fGzb73sPmV
-
 #### Dimensions
 ##
 # To disable the plugin in a specific dimension, change the below settings.
@@ -40,6 +37,15 @@ exclude-hotbar: false
 ## Setting this to true will exclude any items stored in the armor inventory slots.
 ## This includes helmet, chestplate, leggings, boot, and off-hand inventory slots.
 exclude-armor: false
+
+### Excluded items
+##
+## Items in this list will not be removed upon death.
+exclude-items: false
+excluded-item-list:
+  - COMMAND_BLOCK
+  - EMERALD_ORE
+  - DIAMOND
 
 ### Broadcast message to server when a player's items are voided
 ##
