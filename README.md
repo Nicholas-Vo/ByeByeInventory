@@ -20,13 +20,6 @@ enabled-in-overworld: true
 enabled-in-nether: true
 enabled-in-end: true
 
-#### Log deaths to the console
-##
-## Will alert the console when a player has had their inventory voided by the plugin.
-## The plugin will also print out how many items the player has lost.
-
-log-death-to-console: true
-
 ### Exclude the player hotbar
 ##
 ## Setting this to true will exclude any items in the player hotbar at the time of death
@@ -42,10 +35,17 @@ exclude-armor: false
 ##
 ## Items in this list will not be removed upon death.
 exclude-items: false
-excluded-item-list:
+excluded-items-list:
   - COMMAND_BLOCK
   - EMERALD_ORE
   - DIAMOND
+
+#### Log deaths to the console
+##
+## Will alert the console when a player has had their inventory voided by the plugin.
+## The plugin will also print out how many items the player has lost.
+
+log-death-to-console: true
 
 ### Broadcast message to server when a player's items are voided
 ##
