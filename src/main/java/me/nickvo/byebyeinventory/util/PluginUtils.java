@@ -1,5 +1,6 @@
 package me.nickvo.byebyeinventory.util;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -35,8 +36,16 @@ public class PluginUtils {
 
     // Iterate through all armor slots
     public boolean itemInArmorSlot(Player p, ItemStack item) {
-        for (var i : p.getInventory().getArmorContents()) {
-            return i.equals(item);
+        for (int i = 36; i <= 39; i++) {
+            if (p.getInventory().getItem(i) == null) {
+                p.sendMessage("i -> " + i + ": null");
+                continue;
+            }
+            p.sendMessage("item at " + i + ": " +
+                    ChatColor.RED + p.getInventory().getItem(i).getType().name());
+            if (p.getInventory().getItem(i).equals(item)) {
+                return true;
+            }
         }
 
         return false;

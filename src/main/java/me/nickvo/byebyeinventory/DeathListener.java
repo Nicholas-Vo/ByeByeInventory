@@ -61,6 +61,7 @@ public class DeathListener implements Listener {
 
         e.getDrops().forEach(item -> {
             if (config.getBoolean("exclude-armor")) {
+                player.sendMessage(item.getType().name() + " -> " + ChatColor.RED + utils.itemInArmorSlot(player, item));
                 if (utils.itemInArmorSlot(player, item) || player.getInventory().getItemInOffHand().equals(item)) {
                     keep.add(item);
                 }
@@ -78,8 +79,8 @@ public class DeathListener implements Listener {
         count -= keep.size();
 
         if (config.getBoolean("log-death-to-console")) {
-            Bukkit.getLogger().info(plugin.PLUGIN_TAG + player.getName() + "'s inventory was cleared upon death! "
-                    + count + " items were lost.");
+            Bukkit.getLogger().info("[ByeByeInventory] "
+                    + player.getName() + "'s inventory was cleared upon death! " + count + " items were lost.");
         }
 
         if (config.getBoolean("display-message-to-server")) {
