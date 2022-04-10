@@ -64,9 +64,11 @@ public class PluginUtils {
             }
         }
 
+        // Clear out all items dropped upon death and add back the ones we want to keep
         e.getDrops().clear();
         keep.forEach(itemStack -> e.getDrops().add(itemStack));
 
+        // Don't announce anything if the player didn't lose any items
         if ((count -= keep.size()) <= 0) {
             return;
         }
@@ -90,6 +92,9 @@ public class PluginUtils {
         }
     }
 
+    /**
+     * Count how many items are in an inventory
+     */
     public int countInventory(Player p) {
         int count = 0;
 
@@ -105,6 +110,7 @@ public class PluginUtils {
     public List<ItemStack> getHotbarContents(Player p) {
         List<ItemStack> hotbar = new ArrayList<>();
 
+        // index 0 through 8 is the player hotbar
         for (int i = 0; i < 8; i++) {
             ItemStack theItem = p.getInventory().getItem(i);
 
@@ -122,6 +128,7 @@ public class PluginUtils {
     public List<ItemStack> getArmorContents(Player p) {
         List<ItemStack> armor = new ArrayList<>();
 
+        // index 36 through 39 are the armor slots
         for (int i = 36; i <= 39; i++) {
             ItemStack theItem = p.getInventory().getItem(i);
 
@@ -130,7 +137,7 @@ public class PluginUtils {
             }
         }
 
-        armor.add(p.getInventory().getItemInOffHand());
+        armor.add(p.getInventory().getItemInOffHand()); // Add the off-hand item
         return armor;
     }
 

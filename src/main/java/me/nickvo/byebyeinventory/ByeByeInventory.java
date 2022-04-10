@@ -4,6 +4,7 @@ import me.nickvo.byebyeinventory.command.BaseCommand;
 import me.nickvo.byebyeinventory.config.ConfigHandler;
 import me.nickvo.byebyeinventory.config.Messages;
 import me.nickvo.byebyeinventory.util.PluginUtils;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,7 +13,6 @@ import org.bukkit.plugin.java.JavaPlugin;
  * Created by _NickV (GitHub: Nicholas-Vo) on 4/9/2022
  */
 public final class ByeByeInventory extends JavaPlugin {
-    private ByeByeInventory plugin;
     private ConfigHandler config;
     private Messages messages;
     private PluginUtils utils;
@@ -22,18 +22,13 @@ public final class ByeByeInventory extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        plugin = this;
-
         config = new ConfigHandler(this);
         messages = new Messages();
         utils = new PluginUtils(this);
 
         new BaseCommand(this); // This is the /byebyeinv command
         new DeathListener(this);
-    }
-
-    public ByeByeInventory getPlugin() {
-        return plugin;
+        new Metrics(this, 14891); // bStats metrics
     }
 
     public ConfigHandler config() {

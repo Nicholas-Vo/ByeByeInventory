@@ -2,7 +2,6 @@ package me.nickvo.byebyeinventory.config;
 
 import org.bukkit.ChatColor;
 import org.bukkit.World;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.text.DecimalFormat;

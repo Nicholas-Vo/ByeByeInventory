@@ -1,8 +1,6 @@
 package me.nickvo.byebyeinventory.config;
 
 import me.nickvo.byebyeinventory.ByeByeInventory;
-import net.kyori.adventure.text.Component;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
