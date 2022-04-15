@@ -13,7 +13,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class PluginUtils {
@@ -33,14 +32,12 @@ public class PluginUtils {
 
         // If keep inventory is on, we don't want to announce or do anything
         if (player.getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY)) {
-            plugin.getLogger().info("This is within the gamerule check");
             return;
         }
 
         int count = plugin.getUtils().countInventory(player);
 
         if (count <= 0) {
-            plugin.getLogger().info("This is within the count check");
             return;
         }
 
@@ -89,16 +86,28 @@ public class PluginUtils {
                 continue;
             }
 
-            p.sendMessage("item in slot: " + ChatColor.RED + i
-            + ChatColor.RESET + " " + theItem.getType().name());
+            StringBuilder sb = new StringBuilder("item in slot: " + ChatColor.RED + i
+                    + ChatColor.RESET + " " + theItem.getType().name() + " ");
 
             if (config.getExcludedItems().contains(theItem.getType())) {
                 items.add(theItem);
+                sb.append(ChatColor.GOLD + "kept");
             }
 
-            if ((i > 35 && i <= 39) && excludeArmor) items.add(theItem);
-            if (i <= 8 && excludeHotbar) items.add(theItem);
-            if (i == 40 && excludeOffhand) items.add(theItem);
+            if ((i > 35 && i <= 39) && excludeArmor) {
+                items.add(theItem);
+                sb.append(ChatColor.GOLD + "kept");
+            }
+            if (i <= 8 && excludeHotbar) {
+                items.add(theItem);
+                sb.append(ChatColor.GOLD + "kept");
+            }
+            if (i == 40 && excludeOffhand) {
+                items.add(theItem);
+                sb.append(ChatColor.GOLD + "kept");
+            }
+
+            p.sendMessage(sb.toString());
         }
 
         return items;
@@ -109,47 +118,12 @@ public class PluginUtils {
      */
     public int countInventory(Player p) {
         int count = 0;
-
         for (ItemStack item : p.getInventory().getContents()) {
             if (item != null) {
                 count += item.getAmount();
             }
         }
-
         return count;
-    }
-
-    public List<ItemStack> getHotbarContents(Player p) {
-        List<ItemStack> hotbar = new ArrayList<>();
-
-        // index 0 through 8 is the player hotbar
-        for (int i = 0; i < 8; i++) {
-            ItemStack theItem = p.getInventory().getItem(i);
-
-            if (theItem != null) {
-                hotbar.add(theItem);
-            }
-        }
-
-        return hotbar;
-    }
-
-    /**
-     * Get armor contents
-     */
-    public List<ItemStack> getArmorContents(Player p) {
-        List<ItemStack> armor = new ArrayList<>();
-
-        // index 36 through 39 are the armor slots
-        for (int i = 36; i <= 39; i++) {
-            ItemStack theItem = p.getInventory().getItem(i);
-
-            if (theItem != null) {
-                armor.add(theItem);
-            }
-        }
-
-        return armor;
     }
 
 }
