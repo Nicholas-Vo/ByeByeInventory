@@ -1,8 +1,7 @@
 # ByeByeInventory
 A Minecraft plugin which deletes player inventories upon death.
 
-Admins can configure this to occur across specific worlds, and can exclude worn armor, the hotbar, or both from deletion.
-
+Admins can configure this to occur across specific worlds, and can exclude worn armor and the hotbar from deletion.
 # Permissions
 
 - byebyeinventory.lose - Any player given this permission will lose their inventory upon death!
