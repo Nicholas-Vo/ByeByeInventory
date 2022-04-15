@@ -1,5 +1,5 @@
 # ByeByeInventory [![Version](https://img.shields.io/badge/version-1.0.4-blue)](https://www.spigotmc.org/resources/picturelogin-continued.101216/)
-A Minecraft plugin for Spigot servers which allows for delition of player inventories upon death.
+A Minecraft plugin for Spigot servers which allows for deletion of player inventories upon death.
 
 Admins can configure this to occur across specific worlds and can exclude worn armor, the off-hand slot, and the hotbar from deletion.
 
