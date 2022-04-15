@@ -12,9 +12,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class PluginUtils {
     private final ByeByeInventory plugin;
@@ -32,7 +30,7 @@ public class PluginUtils {
         Player player = e.getPlayer();
 
         // If keep inventory is on, we don't want to announce or do anything
-        if (player.getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY)) {
+        if (Boolean.TRUE.equals(player.getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY))) {
             return;
         }
 
@@ -42,36 +40,7 @@ public class PluginUtils {
             return;
         }
 
-        /*
-        todo: Maybe do removeIf()?
-         */
-
-        // Set of the items we don't want deleted. Using set to avoid duplicates in the case
-        // where an item we want to keep has the exact same data as an item in the inventory
-        Set<ItemStack> keep = new HashSet<>();
-
-        for (ItemStack item : e.getDrops()) {
-            if (config.getBoolean("exclude-items")) {
-                if (config.getExcludedItems().contains(item.getType())) {
-                    keep.add(item);
-                }
-            }
-            if (config.getBoolean("exclude-armor")) {
-                if (getArmorContents(player).contains(item)) {
-                    keep.add(item);
-                }
-            }
-            if (config.getBoolean("exclude-offhand")) {
-                if (player.getInventory().getItemInOffHand().equals(item)) {
-                    keep.add(item);
-                }
-            }
-            if (config.getBoolean("exclude-hotbar")) {
-                if (getHotbarContents(player).contains(item)) {
-                    keep.add(item);
-                }
-            }
-        }
+        List<ItemStack> keep = getLostItems(player);
 
         // Clear out all items dropped upon death and add back the ones we want to keep
         e.getDrops().clear();
@@ -99,6 +68,34 @@ public class PluginUtils {
 
             player.sendMessage(msg.translate(player, count, theMsg));
         }
+    }
+
+    private List<ItemStack> getLostItems(Player p) {
+        List<ItemStack> items = new ArrayList<>();
+
+        boolean excludeArmor = config.getBoolean("exclude-armor");
+        boolean excludeHotbar = config.getBoolean("exclude-hotbar");
+        boolean excludeOffhand = config.getBoolean("exclude-offhand");
+
+        for (int i = 0; i < p.getInventory().getSize(); i++) {
+            ItemStack theItem = p.getInventory().getItem(i);
+
+            if (theItem == null) {
+                break;
+            }
+
+            if ((i > 35 && i <= 39) && excludeArmor) continue;
+            if (i <= 8 && excludeHotbar) continue;
+            if (i == 46 && excludeOffhand) continue;
+
+            if (config.getExcludedItems().contains(theItem.getType())) {
+                continue;
+            }
+
+            items.add(p.getInventory().getItem(i));
+        }
+
+        return items;
     }
 
     /**
