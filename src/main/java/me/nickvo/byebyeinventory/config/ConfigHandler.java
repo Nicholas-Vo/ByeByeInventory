@@ -7,6 +7,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 public class ConfigHandler {
@@ -25,8 +26,11 @@ public class ConfigHandler {
     // Admins can exclude specific items from being voided
     private final List<Material> excludedItems = new ArrayList<>();
 
+    EnumSet<World.Environment> set =
+            EnumSet.of(World.Environment.NORMAL, World.Environment.NETHER, World.Environment.THE_END);
+
     public void rebuildConfig() {
-        File configuration = new File(plugin.getDataFolder() + File.separator + "config.yml");
+        File configuration = new File(plugin.getDataFolder(), "config.yml");
 
         if (!configuration.exists()) {
             plugin.saveResource("config.yml", true);
@@ -35,6 +39,7 @@ public class ConfigHandler {
         config = YamlConfiguration.loadConfiguration(configuration);
 
         dimensions.clear();
+        excludedItems.clear();
 
         // Get list from configuration
         if (config.getBoolean("enabled-in-overworld")) {

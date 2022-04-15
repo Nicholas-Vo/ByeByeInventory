@@ -17,8 +17,13 @@ exclude-hotbar: false
 ### Exclude player armor
 ##
 ## Setting this to true will exclude any items stored in the armor inventory slots.
-## This includes helmet, chestplate, leggings, boot, and off-hand inventory slots.
+## This includes helmet, chestplate, leggings, and boot inventory slots.
 exclude-armor: false
+
+### Exclude player off-hand slot
+##
+## Setting this to true will exclude any  stored in the off-hand inventory slot.
+exclude-offhand: false
 
 ### Excluded items
 ##

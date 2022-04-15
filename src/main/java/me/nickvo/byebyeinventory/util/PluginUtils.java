@@ -42,6 +42,10 @@ public class PluginUtils {
             return;
         }
 
+        /*
+        todo: Maybe do removeIf()?
+         */
+
         // Set of the items we don't want deleted. Using set to avoid duplicates in the case
         // where an item we want to keep has the exact same data as an item in the inventory
         Set<ItemStack> keep = new HashSet<>();
@@ -54,6 +58,11 @@ public class PluginUtils {
             }
             if (config.getBoolean("exclude-armor")) {
                 if (getArmorContents(player).contains(item)) {
+                    keep.add(item);
+                }
+            }
+            if (config.getBoolean("exclude-offhand")) {
+                if (player.getInventory().getItemInOffHand().equals(item)) {
                     keep.add(item);
                 }
             }
@@ -123,7 +132,7 @@ public class PluginUtils {
     }
 
     /**
-     * Get armor contents + the offhand item
+     * Get armor contents
      */
     public List<ItemStack> getArmorContents(Player p) {
         List<ItemStack> armor = new ArrayList<>();
@@ -137,7 +146,6 @@ public class PluginUtils {
             }
         }
 
-        armor.add(p.getInventory().getItemInOffHand()); // Add the off-hand item
         return armor;
     }
 
