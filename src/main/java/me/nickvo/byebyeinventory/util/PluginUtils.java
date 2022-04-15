@@ -5,6 +5,7 @@ import me.nickvo.byebyeinventory.config.ConfigHandler;
 import me.nickvo.byebyeinventory.config.Messages;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameRule;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
@@ -12,6 +13,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PluginUtils {
@@ -30,20 +32,23 @@ public class PluginUtils {
         Player player = e.getPlayer();
 
         // If keep inventory is on, we don't want to announce or do anything
-        if (Boolean.TRUE.equals(player.getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY))) {
+        if (player.getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY)) {
+            plugin.getLogger().info("This is within the gamerule check");
             return;
         }
 
         int count = plugin.getUtils().countInventory(player);
 
         if (count <= 0) {
+            plugin.getLogger().info("This is within the count check");
             return;
         }
 
-        List<ItemStack> keep = getLostItems(player);
+        List<ItemStack> keep = getKeptItems(player);
 
         // Clear out all items dropped upon death and add back the ones we want to keep
         e.getDrops().clear();
+
         keep.forEach(itemStack -> e.getDrops().add(itemStack));
 
         // Don't announce anything if the player didn't lose any items
@@ -70,7 +75,7 @@ public class PluginUtils {
         }
     }
 
-    private List<ItemStack> getLostItems(Player p) {
+    private List<ItemStack> getKeptItems(Player p) {
         List<ItemStack> items = new ArrayList<>();
 
         boolean excludeArmor = config.getBoolean("exclude-armor");
@@ -81,18 +86,19 @@ public class PluginUtils {
             ItemStack theItem = p.getInventory().getItem(i);
 
             if (theItem == null) {
-                break;
-            }
-
-            if ((i > 35 && i <= 39) && excludeArmor) continue;
-            if (i <= 8 && excludeHotbar) continue;
-            if (i == 46 && excludeOffhand) continue;
-
-            if (config.getExcludedItems().contains(theItem.getType())) {
                 continue;
             }
 
-            items.add(p.getInventory().getItem(i));
+            p.sendMessage("item in slot: " + ChatColor.RED + i
+            + ChatColor.RESET + " " + theItem.getType().name());
+
+            if (config.getExcludedItems().contains(theItem.getType())) {
+                items.add(theItem);
+            }
+
+            if ((i > 35 && i <= 39) && excludeArmor) items.add(theItem);
+            if (i <= 8 && excludeHotbar) items.add(theItem);
+            if (i == 40 && excludeOffhand) items.add(theItem);
         }
 
         return items;
