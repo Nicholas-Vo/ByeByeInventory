@@ -5,6 +5,7 @@ import me.nickvo.byebyeinventory.config.ConfigHandler;
 import me.nickvo.byebyeinventory.config.Messages;
 import me.nickvo.byebyeinventory.util.PluginUtils;
 
+import me.nickvo.byebyeinventory.util.Updater;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -30,7 +31,14 @@ public final class ByeByeInventory extends JavaPlugin {
 
         new BaseCommand(this); // This is the /byebyeinv command
         new DeathListener(this);
-        //new Metrics(this, 14891); // bStats metrics
+
+        if (config.getBoolean("metrics-enabled")) {
+            new Metrics(this, 14891);
+        }
+
+        if (config.getBoolean("updater-enabled")) {
+            new Updater(getLogger(), getDescription().getVersion());
+        }
     }
 
     public ConfigHandler config() {

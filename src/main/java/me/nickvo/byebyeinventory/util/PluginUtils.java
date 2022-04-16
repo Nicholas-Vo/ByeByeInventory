@@ -5,7 +5,6 @@ import me.nickvo.byebyeinventory.config.ConfigHandler;
 import me.nickvo.byebyeinventory.config.Messages;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.GameRule;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
@@ -31,7 +30,7 @@ public class PluginUtils {
         Player player = e.getPlayer();
 
         // If keep inventory is on, we don't want to announce or do anything
-        if (player.getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY)) {
+        if (Boolean.TRUE.equals(player.getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY))) {
             return;
         }
 
@@ -82,32 +81,16 @@ public class PluginUtils {
         for (int i = 0; i < p.getInventory().getSize(); i++) {
             ItemStack theItem = p.getInventory().getItem(i);
 
-            if (theItem == null) {
-                continue;
-            }
+            if (theItem == null) continue;
 
-            StringBuilder sb = new StringBuilder("item in slot: " + ChatColor.RED + i
-                    + ChatColor.RESET + " " + theItem.getType().name() + " ");
-
-            if (config.getExcludedItems().contains(theItem.getType())) {
+            if (config.getExcludedItems().contains(theItem.getType()))
                 items.add(theItem);
-                sb.append(ChatColor.GOLD + "kept");
-            }
-
-            if ((i > 35 && i <= 39) && excludeArmor) {
+            if ((i > 35 && i <= 39) && excludeArmor)
                 items.add(theItem);
-                sb.append(ChatColor.GOLD + "kept");
-            }
-            if (i <= 8 && excludeHotbar) {
+            if (i <= 8 && excludeHotbar)
                 items.add(theItem);
-                sb.append(ChatColor.GOLD + "kept");
-            }
-            if (i == 40 && excludeOffhand) {
+            if (i == 40 && excludeOffhand)
                 items.add(theItem);
-                sb.append(ChatColor.GOLD + "kept");
-            }
-
-            p.sendMessage(sb.toString());
         }
 
         return items;

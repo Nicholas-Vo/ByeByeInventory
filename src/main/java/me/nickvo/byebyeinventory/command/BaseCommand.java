@@ -29,9 +29,8 @@ public class BaseCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length < 1) {
-            sender.sendMessage(plugin.PLUGIN_TAG + "Running version " + ChatColor.AQUA + plugin.VERSION);
-            sender.sendMessage(plugin.PLUGIN_TAG + "For support, please visit "
-                    + ChatColor.GRAY + "https://discord.gg/fGzb73sPmV");
+            sender.sendMessage(plugin.PLUGIN_TAG + "Running version " + ChatColor.GRAY + plugin.VERSION);
+            sender.sendMessage(plugin.PLUGIN_TAG + "Support: " + ChatColor.GRAY + "https://discord.gg/fGzb73sPmV");
             return true;
         }
 
@@ -49,7 +48,7 @@ public class BaseCommand implements CommandExecutor, TabCompleter {
         }
 
         /*
-        Only one command for now!
+        Only one command for now
          */
         List<String> results = new ArrayList<>();
         for (String s : List.of("reload")) {
