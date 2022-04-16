@@ -85,11 +85,11 @@ public class PluginUtils {
 
             if (config.getExcludedItems().contains(theItem.getType()))
                 items.add(theItem);
-            if ((i > 35 && i <= 39) && excludeArmor)
+            else if ((i > 35 && i <= 39) && excludeArmor)
                 items.add(theItem);
-            if (i <= 8 && excludeHotbar)
+            else if (i <= 8 && excludeHotbar)
                 items.add(theItem);
-            if (i == 40 && excludeOffhand)
+            else if (i == 40 && excludeOffhand)
                 items.add(theItem);
         }
 

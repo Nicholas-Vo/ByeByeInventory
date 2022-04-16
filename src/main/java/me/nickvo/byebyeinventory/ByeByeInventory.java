@@ -7,6 +7,7 @@ import me.nickvo.byebyeinventory.util.PluginUtils;
 
 import me.nickvo.byebyeinventory.util.Updater;
 import org.bstats.bukkit.Metrics;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -33,7 +34,7 @@ public final class ByeByeInventory extends JavaPlugin {
         new DeathListener(this);
 
         if (config.getBoolean("metrics-enabled")) {
-            new Metrics(this, 14891);
+            Bukkit.getScheduler().runTaskAsynchronously(this, () -> new Metrics(this, 14891));
         }
 
         if (config.getBoolean("updater-enabled")) {

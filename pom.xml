@@ -51,7 +51,7 @@
                     <relocations>
                         <relocation>
                             <pattern>org.bstats</pattern>
-                            <shadedPattern>me.nickvo.byebyeinventory</shadedPattern>
+                            <shadedPattern>me.nickvo.byebyeinventory.bstats</shadedPattern>
                         </relocation>
                     </relocations>
                     <filters>
