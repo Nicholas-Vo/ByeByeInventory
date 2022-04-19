@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class Updater {
 
     public Updater(Logger log, String currentVersion) {
-        final String USER_AGENT = "PictureLogin Plugin";
+        final String USER_AGENT = "ByeByeInventory";
         final String PLUGIN_ID = "101405"; // This is the Spigot plugin ID
 
         try {
@@ -29,7 +29,7 @@ public class Updater {
             // Compare current plugin version with downloaded one
             if (!currentVersion.equalsIgnoreCase(latest_version)) {
                 log.info("New update available! Current version: " + currentVersion + " latest version: " + latest_version);
-                log.info("update_available_download");
+                log.info("https://www.spigotmc.org/resources/byebyeinventory.101405/");
             }
         } catch (Exception e) {
             log.warning("Error with the updater: " + e.getMessage());
