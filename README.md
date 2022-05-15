@@ -5,7 +5,7 @@ Admins can configure this to occur across specific worlds and can exclude worn a
 
 Obtaining the plugin
 ---
-You can download the plugin over on Spigot: https://www.spigotmc.org/resources/picturelogin-continued.101216/
+You can download the plugin over on Spigot: https://www.spigotmc.org/resources/byebyeinventory.101405/
 
 # Permissions
 
