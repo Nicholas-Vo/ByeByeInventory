@@ -29,7 +29,7 @@ public class BaseCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length < 1) {
-            sender.sendMessage(plugin.PLUGIN_TAG + "Running version " + ChatColor.GRAY + plugin.VERSION);
+            sender.sendMessage(plugin.PLUGIN_TAG + "Running version " + ChatColor.GRAY + plugin.getDescription().getVersion());
             sender.sendMessage(plugin.PLUGIN_TAG + "Support: " + ChatColor.GRAY + "https://discord.gg/fGzb73sPmV");
             return true;
         }
@@ -52,8 +52,9 @@ public class BaseCommand implements CommandExecutor, TabCompleter {
          */
         List<String> results = new ArrayList<>();
         for (String s : List.of("reload")) {
-            if (s.toLowerCase().startsWith(args[0].toLowerCase()))
+            if (s.toLowerCase().startsWith(args[0].toLowerCase())) {
                 results.add(s);
+            }
         }
         return results;
     }

@@ -24,7 +24,6 @@ public class Messages {
 
     private String formatNumber(int itemsLost) {
         DecimalFormat nFormat = new DecimalFormat("#,###");
-
         return nFormat.format(itemsLost);
     }
 

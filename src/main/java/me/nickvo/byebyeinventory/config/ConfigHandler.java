@@ -22,16 +22,11 @@ public class ConfigHandler {
 
     // Admins can determine if they want the plugin to work per-dimension via config
     private final List<World.Environment> dimensions = new ArrayList<>();
-
     // Admins can exclude specific items from being voided
     private final List<Material> excludedItems = new ArrayList<>();
 
-    EnumSet<World.Environment> set =
-            EnumSet.of(World.Environment.NORMAL, World.Environment.NETHER, World.Environment.THE_END);
-
     public void rebuildConfig() {
         File configuration = new File(plugin.getDataFolder(), "config.yml");
-
         if (!configuration.exists()) {
             plugin.saveResource("config.yml", true);
         }

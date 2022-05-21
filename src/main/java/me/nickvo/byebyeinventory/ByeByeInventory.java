@@ -20,7 +20,6 @@ public final class ByeByeInventory extends JavaPlugin {
     private Messages messages;
     private PluginUtils utils;
 
-    public final String VERSION = "1.0.0";
     public final String PLUGIN_TAG = ChatColor.RED + "ByeByeInventory " + ChatColor.GRAY + ">> " + ChatColor.RESET;
 
     @Override
