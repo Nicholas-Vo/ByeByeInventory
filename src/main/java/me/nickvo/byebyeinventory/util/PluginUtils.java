@@ -21,30 +21,23 @@ public class PluginUtils {
 
     public PluginUtils(ByeByeInventory plugin) {
         this.plugin = plugin;
-
         config = plugin.config();
         msg = plugin.getMessages();
     }
 
     public void voidInventory(PlayerDeathEvent e) {
         Player player = e.getPlayer();
-
         // If keep inventory is on, we don't want to announce or do anything
         if (Boolean.TRUE.equals(player.getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY))) {
             return;
         }
-
         int count = plugin.getUtils().countInventory(player);
-
         if (count <= 0) {
             return;
         }
 
         List<ItemStack> keep = getKeptItems(player);
-
-        // Clear out all items dropped upon death and add back the ones we want to keep
-        e.getDrops().clear();
-
+        e.getDrops().clear(); // Clear out all items dropped upon death and add back the ones we want to keep.
         keep.forEach(itemStack -> e.getDrops().add(itemStack));
 
         // Don't announce anything if the player didn't lose any items
@@ -59,30 +52,26 @@ public class PluginUtils {
 
         if (config.getBoolean("display-message-to-server")) {
             String theMsg = config.getMessage("message-to-server");
-            Component component = Component.text(msg.translate(player, count, theMsg));
-
-            Bukkit.broadcast(component, Server.BROADCAST_CHANNEL_USERS);
+            Bukkit.broadcast(Component.text(msg.translate(player, count, theMsg)), Server.BROADCAST_CHANNEL_USERS);
         }
 
         if (config.getBoolean("display-message-to-player")) {
             String theMsg = config.getMessage("message-to-player");
-
             player.sendMessage(msg.translate(player, count, theMsg));
         }
     }
 
     private List<ItemStack> getKeptItems(Player p) {
         List<ItemStack> items = new ArrayList<>();
-
         boolean excludeArmor = config.getBoolean("exclude-armor");
         boolean excludeHotbar = config.getBoolean("exclude-hotbar");
         boolean excludeOffhand = config.getBoolean("exclude-offhand");
 
         for (int i = 0; i < p.getInventory().getSize(); i++) {
             ItemStack theItem = p.getInventory().getItem(i);
-
-            if (theItem == null) continue;
-
+            if (theItem == null) {
+                continue;
+            }
             if (config.getExcludedItems().contains(theItem.getType()))
                 items.add(theItem);
             else if ((i > 35 && i <= 39) && excludeArmor)
@@ -92,7 +81,6 @@ public class PluginUtils {
             else if (i == 40 && excludeOffhand)
                 items.add(theItem);
         }
-
         return items;
     }
 
