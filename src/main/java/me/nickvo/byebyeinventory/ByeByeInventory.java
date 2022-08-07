@@ -12,14 +12,13 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
- * ByeByeInventory version 1.0.0
- * Created by _NickV (GitHub: Nicholas-Vo) on 4/9/2022
+ * ByeByeInventory Minecraft plugin
+ * Created by Nicholas-Vo on 4/9/2022
  */
 public final class ByeByeInventory extends JavaPlugin {
     private ConfigHandler config;
     private Messages messages;
     private PluginUtils utils;
-
     public final String PLUGIN_TAG = ChatColor.RED + "ByeByeInventory " + ChatColor.GRAY + ">> " + ChatColor.RESET;
 
     @Override
@@ -27,14 +26,12 @@ public final class ByeByeInventory extends JavaPlugin {
         config = new ConfigHandler(this);
         messages = new Messages();
         utils = new PluginUtils(this);
-
         new BaseCommand(this); // This is the /byebyeinv command
         new DeathListener(this);
 
         if (config.getBoolean("metrics-enabled")) {
             Bukkit.getScheduler().runTaskAsynchronously(this, () -> new Metrics(this, 14891));
         }
-
         if (config.getBoolean("updater-enabled")) {
             new Updater(getLogger(), getDescription().getVersion());
         }

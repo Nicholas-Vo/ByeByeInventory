@@ -12,10 +12,10 @@ public class Updater {
 
     public Updater(Logger log, String currentVersion) {
         final String USER_AGENT = "ByeByeInventory";
-        final String PLUGIN_ID = "101405"; // This is the Spigot plugin ID
+        final String PLUGIN_ID = "101405"; // This is the Spigot plugin ID.
 
         try {
-            // Connect to SpiGet
+            // Connect to api.spiget.org
             URL url = new URL("https://api.spiget.org/v2/resources/" + PLUGIN_ID + "/versions/latest");
             var connection = (HttpURLConnection) url.openConnection();
             connection.addRequestProperty("User-Agent", USER_AGENT);// Set User-Agent
@@ -23,7 +23,6 @@ public class Updater {
             // Read downloaded file
             var streamReader = new InputStreamReader(connection.getInputStream());
             JsonObject jsonObject = new JsonParser().parse(streamReader).getAsJsonObject();
-
             String latest_version = jsonObject.get("name").toString().replace("\"", "");
 
             // Compare current plugin version with downloaded one

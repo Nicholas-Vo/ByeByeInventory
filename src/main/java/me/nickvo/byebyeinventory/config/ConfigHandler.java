@@ -16,7 +16,6 @@ public class ConfigHandler {
 
     public ConfigHandler(ByeByeInventory plugin) {
         this.plugin = plugin;
-
         rebuildConfig();
     }
 
@@ -32,7 +31,6 @@ public class ConfigHandler {
         }
 
         config = YamlConfiguration.loadConfiguration(configuration);
-
         dimensions.clear();
         excludedItems.clear();
 
@@ -40,15 +38,12 @@ public class ConfigHandler {
         if (config.getBoolean("enabled-in-overworld")) {
             dimensions.add(World.Environment.NORMAL);
         }
-
         if (config.getBoolean("enabled-in-nether")) {
             dimensions.add(World.Environment.NETHER);
         }
-
         if (config.getBoolean("enabled-in-end")) {
             dimensions.add(World.Environment.THE_END);
         }
-
         // Get list of excluded materials from configuration
         if (config.getBoolean("exclude-items")) {
             config.getStringList("excluded-items-list")

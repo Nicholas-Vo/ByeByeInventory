@@ -15,7 +15,6 @@ public class DeathListener implements Listener {
 
     public DeathListener(ByeByeInventory plugin) {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
-
         config = plugin.config();
         utils = plugin.getUtils();
     }
@@ -23,19 +22,15 @@ public class DeathListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerDeath(PlayerDeathEvent e) {
         Player player = e.getPlayer();
-
         if (!player.hasPermission("byebyeinventory.lose")) {
             return;
         }
-
         if (player.hasPermission("byebyeinventory.exempt")) {
             return;
         }
 
         World.Environment playerWorld = player.getWorld().getEnvironment();
-
-        // Check if the player is in a world where the plugin is active
-        if (config.getDimensions().contains(playerWorld)) {
+        if (config.getDimensions().contains(playerWorld)) { // Check if the player is in a world where the plugin is active
             utils.voidInventory(e);
         }
     }

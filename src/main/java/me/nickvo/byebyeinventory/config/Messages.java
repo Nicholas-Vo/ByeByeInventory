@@ -29,16 +29,13 @@ public class Messages {
 
     private String getDimension(Player player) {
         World.Environment world = player.getWorld().getEnvironment();
-
         String dimension;
         switch (world) {
             case NORMAL -> dimension = "overworld";
             case NETHER -> dimension = "nether";
             case THE_END -> dimension = "end";
-
             default -> dimension = world.name(); // If it's a custom dimension, just return the name
         }
-
         return dimension;
     }
 

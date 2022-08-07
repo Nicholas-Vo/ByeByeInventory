@@ -17,7 +17,6 @@ public class BaseCommand implements CommandExecutor, TabCompleter {
 
     public BaseCommand(ByeByeInventory plugin) {
         this.plugin = plugin;
-
         plugin.getCommand("byebyeinv").setExecutor(this);
     }
 
