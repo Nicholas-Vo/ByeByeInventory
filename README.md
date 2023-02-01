@@ -1,4 +1,4 @@
-![bbi](https://user-images.githubusercontent.com/60233722/216145891-b6d5ed91-36e3-4e16-8f46-5d098d84b50a.PNG)
+![bbi-logo](https://user-images.githubusercontent.com/60233722/216146138-eaeffd98-33fd-437e-9eeb-781cabd7ff30.png)
 
 # ByeByeInventory [![Version](https://img.shields.io/badge/version-1.0.1-blue)](https://www.spigotmc.org/resources/picturelogin-continued.101216/)
 A Minecraft plugin for Spigot servers which allows for deletion of player inventories upon death.
