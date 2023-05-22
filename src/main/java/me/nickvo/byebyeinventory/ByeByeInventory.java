@@ -27,7 +27,7 @@ public final class ByeByeInventory extends JavaPlugin {
         messages = new Messages();
         utils = new PluginUtils(this);
         new BaseCommand(this); // This is the /byebyeinv command
-        new DeathListener(this);
+        new DeathListener(this, msg);
 
         if (config.getBoolean("metrics-enabled")) {
             Bukkit.getScheduler().runTaskAsynchronously(this, () -> new Metrics(this, 14891));
